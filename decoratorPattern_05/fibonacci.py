@@ -12,4 +12,3 @@ if __name__=='__main__':
     from timeit import Timer
     t=Timer('fibonacci(100)','from __main__ import fibonacci')
     print(t.timeit())
-    
