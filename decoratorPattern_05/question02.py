@@ -1,4 +1,4 @@
-
+condition=False
 def withpara(para=True):
     def inner(fn):
         if para ==False:
@@ -13,7 +13,7 @@ def withpara(para=True):
 
     return inner
 
-@withpara(False)
+@withpara(condition)
 def f(a):
     return a+2
 
