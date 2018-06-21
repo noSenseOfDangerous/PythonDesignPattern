@@ -3,8 +3,7 @@ class LazyProperty:
     def __init__(self,method):
         self.method=method
         self.method_name=method.__name__
-        #print('function overriden: {}'.format(self.fget))
-        #print("function's name: {}".format(self.func_name))
+
     def __get__(self, instance, owner):
         if not instance:
             return  None
