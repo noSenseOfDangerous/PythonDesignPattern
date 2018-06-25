@@ -29,15 +29,14 @@ class QuoteTerminalController:
         self.view=QuoteTerminalView()
 
     def run(self):
-        valid_input=False
-        while not valid_input:
-            n=self.view.select_quote()
-            try:
-                n=int(n)
-            except ValueError as err:
-                self.view.show("Incorrect index '{}'".format(n))
-            else:
-                valid_input=True
+        n=self.view.select_quote()
+        try:
+            n=int(n)
+
+        except ValueError as err:
+            self.view.show("Incorrect index '{}'".format(n))
+            return
+
         quote=self.model.get_quote(n)
         self.view.show(quote)
 def main():
