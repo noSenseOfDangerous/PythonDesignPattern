@@ -15,7 +15,7 @@ class RenameFile:
     def undo(self):
         if verbose:
             print('[renaming {} back to {}]'.format(self.dest, self.src))
-        os.rename(self.dest,self.src)
+        os.rename(self.dest, self.src)
 
 
 def delete_file(path):
@@ -51,25 +51,21 @@ class ReadFile:
 
 
 def main():
-    org_name, new_name = 'file1', 'file2'
+    org_name = 'file1'
+    df = delete_file
     commands = []
-    for cmd in CreateFile(org_name), ReadFile(org_name), RenameFile(org_name, new_name):
-        commands.append(cmd)
-
-    [c.execute() for c in commands]
-
-    answer = input('reverse the excuted commands? [y/n]')
-
-    if answer not in 'yY':
-        print("the result is {}".format(new_name))
-        exit()
+    commands.append(df)
+    for c in commands:
+        try:
+            c.execute()
+        except AttributeError as e:
+            df(org_name)
 
     for c in reversed(commands):
         try:
             c.undo()
         except AttributeError as e:
             pass
-
 
 if __name__ == '__main__':
     main()
