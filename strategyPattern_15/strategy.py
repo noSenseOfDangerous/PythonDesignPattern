@@ -13,6 +13,8 @@ def allUniqueSort(s):
     if len(s)>LIMIT:
         print(WARNING)
         time.sleep(SLOW)
+    if len(s)==1:
+        return True
     strStr=sorted(s)
     for (c1,c2) in pairs(strStr):
         if c1==c2:
@@ -25,7 +27,10 @@ def allUniqueSet(s):
         time.sleep(SLOW)
     return True if len(s)==len(set(s)) else False
 
-def allUnique(s,strategy):
+def allUnique(s):
+    strategy=allUniqueSet
+    if(len(s)<LIMIT):
+        strategy=allUniqueSort
     return strategy(s)
 
 def main():
@@ -36,15 +41,7 @@ def main():
             if word=='quit':
                 print('bye')
                 return
-            strategy_picked=None
-            strategies={'1':allUniqueSet,'2':allUniqueSort}
-            while strategy_picked not in strategies:
-                strategy_picked=input('Choose strategy: [1] Use a set, [2] Sort and pair>')
+            print('allUnique:({}): {}'.format(word,allUnique(word)))
 
-                try:
-                    strategy=strategies[strategy_picked]
-                    print('allUnique:({}): {}'.format(word,allUnique(word,strategy)))
-                except KeyError as err:
-                    print('Incorrect option: {}'.format(strategy_picked))
 if __name__ == '__main__':
     main()
