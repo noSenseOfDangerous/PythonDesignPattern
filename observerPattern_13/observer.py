@@ -1,13 +1,14 @@
 class Publisher:
     def __init__(self):
-        self.observers=[]
-    def add(self,observer):
+        self.observers = []
+
+    def add(self, observer):
         if observer not in self.observers:
             self.observers.append(observer)
         else:
             print("Failed to add: {}".format(observer))
 
-    def remove(self,observer):
+    def remove(self, observer):
         try:
             self.observers.remove(observer)
         except ValueError:
@@ -16,55 +17,61 @@ class Publisher:
     def notify(self):
         [o.notify(self) for o in self.observers]
 
+
 class DefaultFormatter(Publisher):
-    def __init__(self,name):
+    def __init__(self, name):
         Publisher.__init__(self)
-        self.name=name
-        self._data=0
+        self.name = name
+        self._data = 0
 
     def __str__(self):
-        return "{}: '{}' has data = {}".format(type(self).__name__,self.name,self._data)
+        return "{}: '{}' has data = {}".format(type(self).__name__, self.name, self._data)
 
     @property
     def data(self):
         return self._data
 
     @data.setter
-    def data(self,new_value):
+    def data(self, new_value):
         try:
-            self._data=new_value
+            self._data = new_value
         except ValueError as e:
             print("Error: {}".format(e))
         else:
             self.notify()
+
+
 class HexFormatter:
-    def notify(self,publisher):
-        print("{}: '{}' has now hex data = {}".format(type(self).__name__,publisher.name,hex(publisher.data)))
+    def notify(self, publisher):
+        print("{}: '{}' has now hex data = {}".format(type(self).__name__, publisher.name, hex(publisher.data)))
+
 
 class BinaryFormatter:
-    def notify(self,publisher):
+    def notify(self, publisher):
         print("{}: '{}' has now binary data = {}".format(type(self).__name__, publisher.name, bin(publisher.data)))
 
+
 def main():
-    df=DefaultFormatter('test1')
+    df = DefaultFormatter('test1')
     print(df)
 
     print()
-    hf=HexFormatter()
+    hf = HexFormatter()
     df.add(hf)
-    df.data=3
+    df.data = 3
     print(df)
 
     print()
-    bf=BinaryFormatter()
+    bf = BinaryFormatter()
     df.add(bf)
-    df.data=21
+    df.data = 21
     print(df)
 
     print()
     df.remove(hf)
-    df.data=13
+    df.data = 13
     print(df)
+
 
 if __name__ == '__main__':
     main()
