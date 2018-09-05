@@ -1,4 +1,5 @@
 from collections import OrderedDict
+import copy
 class Book:
     def __init__(self,name,authors,price,**rest):
         self.name=name
@@ -14,3 +15,18 @@ class Book:
                 mylist.append('$')
             mylist.append('\n')
         return ''.join(mylist)
+class Prototype:
+    def __init__(self):
+        self.objects=dict()
+    def register(self,identifier,obj):
+        self.objects[identifier]=obj
+    def unregister(self,identifier):
+        del self.objects[identifier]
+    def clone(self,identifier,**attr):
+        found=self.objects.get(identifier)
+        if not found:
+            raise ValueError('Incorrect object identifier {}'.format(identifier))
+        obj=copy.deepcopy(found)
+        obj.__dict__.update(attr)
+        return obj
+
