@@ -29,4 +29,40 @@ class Prototype:
         obj=copy.deepcopy(found)
         obj.__dict__.update(attr)
         return obj
+def main():
+    b1=Book('The C Programming Language',('Brian W. Kernighan','Dennis M.Richie'),
+            price=118,publisher='Prentice Hall',length=228,
+            publication_date='1978-02-22',
+            tags=('C','programming','algorithms','data structures'))
+    prototype=Prototype()
+    cid='k&r-first'
+    prototype.register(cid,b1)
+    b2=prototype.clone(cid,name='The C Programming Language(ANSI)',price=48.99,
+                       length=274,publication_date='1988-04-01',edition=2)
+    for i in (b1,b2):
+        print(i)
+    print("ID b1 : {} != ID b2 : {}".format(id(b1),id(b2)))
+
+if __name__ == '__main__':
+    main()
+'''Output:   
+authors: ('Brian W. Kernighan', 'Dennis M.Richie')
+length: 228
+name: The C Programming Language
+price: 118$
+publication_date: 1978-02-22
+publisher: Prentice Hall
+tags: ('C', 'programming', 'algorithms', 'data structures')
+
+authors: ('Brian W. Kernighan', 'Dennis M.Richie')
+edition: 2
+length: 274
+name: The C Programming Language(ANSI)
+price: 48.99$
+publication_date: 1988-04-01
+publisher: Prentice Hall
+tags: ('C', 'programming', 'algorithms', 'data structures')
+
+ID b1 : 139864275644992 != ID b2 : 139864167684752
+'''
 
