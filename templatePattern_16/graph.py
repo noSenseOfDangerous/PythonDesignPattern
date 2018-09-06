@@ -58,3 +58,12 @@ def main():
 
 if __name__ == '__main__':
     main()
+'''
+Output:
+['Frankfurt', 'Mannheim', 'Wurzburg', 'Kassel', 'Karlsruhe', 'Erfurt', 'Nurnberg']
+['Frankfurt', 'Mannheim', 'Karlsruhe', 'Augsburg', 'Munchen', 'Wurzburg', 'Erfurt', 'Nurnberg']
+bfs Frankfurt-Nurnberg: ['Frankfurt', 'Mannheim', 'Wurzburg', 'Kassel', 'Karlsruhe', 'Erfurt', 'Nurnberg']
+dfs Frankfurt-Nurnberg: ['Frankfurt', 'Mannheim', 'Karlsruhe', 'Augsburg', 'Munchen', 'Wurzburg', 'Erfurt', 'Nurnberg']
+bfs Wurzburg-Kassel: Not found
+dfs Wurzburg-Kassel: Not found
+'''
